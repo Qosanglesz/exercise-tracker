@@ -1,6 +1,6 @@
-using System.ComponentModel.DataAnnotations;
+namespace ExerciseTrackerAPI.Features.ExerciseTasks.Models;
 
-namespace ExerciseTrackerAPI.Features.Task.Entities;
+using System.ComponentModel.DataAnnotations;
 
 public class ExerciseTask
 {

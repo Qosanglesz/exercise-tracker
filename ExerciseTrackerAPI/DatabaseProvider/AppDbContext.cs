@@ -1,4 +1,4 @@
-using ExerciseTrackerAPI.Features.Task.Entities;
+using ExerciseTrackerAPI.Features.ExerciseTasks.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExerciseTrackerAPI.DatabaseProvider;

@@ -1,5 +1,7 @@
 using ExerciseTrackerAPI.DatabaseProvider;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 // App's builder Zone
 var builder = WebApplication.CreateBuilder(args);
