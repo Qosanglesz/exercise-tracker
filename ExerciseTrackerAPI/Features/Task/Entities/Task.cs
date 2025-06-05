@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace ExerciseTrackerAPI.Features.Task.Entities;
 
 public class Task
