@@ -1,42 +1,68 @@
+using AutoMapper;
 using ExerciseTrackerAPI.DatabaseProvider;
-using ExerciseTrackerAPI.Exceptions;
 using ExerciseTrackerAPI.Features.ExerciseTasks.DTOs;
 using ExerciseTrackerAPI.Features.ExerciseTasks.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExerciseTrackerAPI.Features.ExerciseTasks.Services;
 
 public class ExerciseTaskService : IExerciseService
 {
     private readonly AppDbContext _context;
+    private readonly IMapper _mapper;
 
-    public ExerciseTaskService(AppDbContext context)
+    public ExerciseTaskService(AppDbContext context, IMapper mapper)
     {
         this._context = context;
+        this._mapper = mapper;
     }
 
     public async Task<ExerciseTask> Create(CreateExerciseTaskDto createExerciseTaskDto)
     {
-        var exerciseTask = new ExerciseTask()
+        var exerciseTask = new ExerciseTask();
+        this._mapper.Map(createExerciseTaskDto, exerciseTask);
+        var result = await this._context.ExerciseTasks.AddAsync(exerciseTask);
+        await _context.SaveChangesAsync();
+        return result.Entity;
+    }
+
+public async Task<ExerciseTask> Get(Guid id)
+    {
+        var exerciseTask = await this._context.ExerciseTasks.FindAsync(id);
+        if (exerciseTask == null)
         {
-            Name = createExerciseTaskDto.Name,
-            NumberOfSet = createExerciseTaskDto.NumberOfSet,
-            Weight = createExerciseTaskDto.Weight,
-        };
-        this._context.ExerciseTasks.Add(exerciseTask);
+            throw new Exception($"No exercise task found with id {id}");
+        }
+        return exerciseTask;
     }
 
-public Task<ExerciseTask> Get(int id)
+    public async Task<List<ExerciseTask>> GetAll()
     {
-        throw new NotImplementedException();
+        var exerciseTasks = await this._context.ExerciseTasks.ToListAsync();
+        return exerciseTasks;
     }
 
-    public Task<List<ExerciseTask>> GetAll()
+    public async Task<ExerciseTask> Update(Guid id, UpdateExerciseTaskDto updateExerciseTaskDto)
     {
-        throw new NotImplementedException();
+        var exerciseTask = await this.Get(id);
+        this._mapper.Map(updateExerciseTaskDto, exerciseTask);
+        var result = this._context.ExerciseTasks.Update(exerciseTask);
+        await _context.SaveChangesAsync();
+        return result.Entity;
     }
 
-    public Task<bool> Delete(int id)
+    public async Task<bool> Delete(Guid id)
     {
-        throw new NotImplementedException();
+        var exerciseTask = await this.Get(id);
+        try
+        {
+            this._context.Remove(exerciseTask);
+            await this._context.SaveChangesAsync();
+            return  true;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Error deleting exercise task with id {id}", ex);
+        }
     }
 }

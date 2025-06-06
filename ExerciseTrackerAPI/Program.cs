@@ -1,4 +1,6 @@
 using ExerciseTrackerAPI.DatabaseProvider;
+using ExerciseTrackerAPI.Features.ExerciseTasks.Services;
+using ExerciseTrackerAPI.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,8 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetSection("database:ConnectionStrings")["docker-compose"]));
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddScoped<IExerciseService, ExerciseTaskService>();
 
 // App Zone
 var app = builder.Build();
-app.MapGet("/", () => "Hello World!");
+app.MapControllers();
 app.Run();

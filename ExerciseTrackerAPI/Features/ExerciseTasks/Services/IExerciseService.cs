@@ -11,9 +11,12 @@ public interface IExerciseService
     Task<ExerciseTask> Create(CreateExerciseTaskDto createExerciseTaskDto);
     
     // Read
-    Task<ExerciseTask> Get(int id);
+    Task<ExerciseTask> Get(Guid id);
     Task<List<ExerciseTask>> GetAll();
     
+    //Update
+    Task<ExerciseTask> Update(Guid id, UpdateExerciseTaskDto updateExerciseTaskDto);
+    
     // Delete
-    Task<bool> Delete(int id);
+    Task<bool> Delete(Guid id);
 }
