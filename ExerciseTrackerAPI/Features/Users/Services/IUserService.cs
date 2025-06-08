@@ -6,4 +6,5 @@ namespace ExerciseTrackerAPI.Features.Users.Services;
 public interface IUserService
 {
     public Task<User> Create(CreateUserDto createUserDto);
+    public Task<User> CheckLogin(UserLoginDto userLoginDto);
 }

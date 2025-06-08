@@ -3,6 +3,7 @@ using ExerciseTrackerAPI.DatabaseProvider;
 using ExerciseTrackerAPI.Features.Users.DTOs;
 using ExerciseTrackerAPI.Features.Users.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExerciseTrackerAPI.Features.Users.Services;
 
@@ -27,5 +28,24 @@ public class UserService: IUserService
         var result = this._context.Users.Add(user);
         await _context.SaveChangesAsync();
         return result.Entity;
+    }
+
+    public async Task<User> CheckLogin(UserLoginDto userLoginDto)
+    {
+        // find user by username
+        var user = await _context.Users
+            .SingleOrDefaultAsync(u => u.Username == userLoginDto.Username);
+
+        if (user == null)
+            throw new Exception("User not found");
+        
+        var verificationResult = _hasher.VerifyHashedPassword(user, user.Password, userLoginDto.Password);
+
+        if (verificationResult != PasswordVerificationResult.Success)
+        {
+            throw new Exception("Invalid password");
+        }
+
+        return user;
     }
 }
