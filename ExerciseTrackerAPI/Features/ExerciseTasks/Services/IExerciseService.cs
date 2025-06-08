@@ -8,15 +8,15 @@ public interface IExerciseService
     // CRUD Operation
     
     // Create
-    Task<ExerciseTask> Create(CreateExerciseTaskDto createExerciseTaskDto);
+    Task<ExerciseTask> Create(CreateExerciseTaskDto createExerciseTaskDto, string userId);
     
     // Read
-    Task<ExerciseTask> Get(Guid id);
-    Task<List<ExerciseTask>> GetAll();
+    Task<ExerciseTask> Get(Guid id, string userId);
+    Task<List<ExerciseTask>> GetAll(string userId);
     
     //Update
-    Task<ExerciseTask> Update(Guid id, UpdateExerciseTaskDto updateExerciseTaskDto);
+    Task<ExerciseTask> Update(Guid id, UpdateExerciseTaskDto updateExerciseTaskDto, string userId);
     
     // Delete
-    Task<bool> Delete(Guid id);
+    Task<bool> Delete(Guid id, string userId);
 }

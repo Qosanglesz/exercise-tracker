@@ -17,52 +17,52 @@ public class ExerciseTaskService : IExerciseService
         this._mapper = mapper;
     }
 
-    public async Task<ExerciseTask> Create(CreateExerciseTaskDto createExerciseTaskDto)
+    public async Task<ExerciseTask> Create(CreateExerciseTaskDto dto, string userId)
     {
-        var exerciseTask = new ExerciseTask();
-        this._mapper.Map(createExerciseTaskDto, exerciseTask);
-        var result = await this._context.ExerciseTasks.AddAsync(exerciseTask);
-        await _context.SaveChangesAsync();
+        var task = this._mapper.Map<ExerciseTask>(dto);
+        task.UserId = Guid.Parse(userId);
+
+        var result = await this._context.ExerciseTasks.AddAsync(task);
+        await this._context.SaveChangesAsync();
         return result.Entity;
     }
 
-public async Task<ExerciseTask> Get(Guid id)
+
+    public async Task<ExerciseTask> Get(Guid id, string userId)
     {
-        var exerciseTask = await this._context.ExerciseTasks.FindAsync(id);
-        if (exerciseTask == null)
-        {
-            throw new Exception($"No exercise task found with id {id}");
-        }
-        return exerciseTask;
+        var task = await this._context.ExerciseTasks
+            .FirstOrDefaultAsync(t => t.Id == id && t.UserId == Guid.Parse(userId));
+
+        if (task == null)
+            throw new Exception("Task not found or access denied.");
+
+        return task;
     }
 
-    public async Task<List<ExerciseTask>> GetAll()
+
+    public async Task<List<ExerciseTask>> GetAll(string userId)
     {
-        var exerciseTasks = await this._context.ExerciseTasks.ToListAsync();
-        return exerciseTasks;
+        return await this._context.ExerciseTasks
+            .Where(t => t.UserId == Guid.Parse(userId))
+            .ToListAsync();
     }
 
-    public async Task<ExerciseTask> Update(Guid id, UpdateExerciseTaskDto updateExerciseTaskDto)
+    public async Task<ExerciseTask> Update(Guid id, UpdateExerciseTaskDto dto, string userId)
     {
-        var exerciseTask = await this.Get(id);
-        this._mapper.Map(updateExerciseTaskDto, exerciseTask);
-        var result = this._context.ExerciseTasks.Update(exerciseTask);
+        var task = await Get(id, userId); // Already checks ownership
+        this._mapper.Map(dto, task);
+
+        this._context.ExerciseTasks.Update(task);
         await _context.SaveChangesAsync();
-        return result.Entity;
+        return task;
     }
 
-    public async Task<bool> Delete(Guid id)
+
+    public async Task<bool> Delete(Guid id, string userId)
     {
-        var exerciseTask = await this.Get(id);
-        try
-        {
-            this._context.Remove(exerciseTask);
-            await this._context.SaveChangesAsync();
-            return  true;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Error deleting exercise task with id {id}", ex);
-        }
+        var task = await Get(id, userId); // Already checks ownership
+        this._context.ExerciseTasks.Remove(task);
+        await _context.SaveChangesAsync();
+        return true;
     }
 }
