@@ -4,6 +4,7 @@ using System.Text;
 using ExerciseTrackerAPI.Configuration;
 using ExerciseTrackerAPI.Features.Users.DTOs;
 using ExerciseTrackerAPI.Features.Users.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
@@ -73,4 +74,28 @@ public class UserController: ControllerBase
             return Unauthorized(e.Message);
         }
     }
+    
+    [HttpPost("logout")]
+    public IActionResult Logout()
+    {
+        Response.Cookies.Append("access_token", "", new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = false,
+            SameSite = SameSiteMode.Strict,
+            Expires = DateTimeOffset.UtcNow.AddDays(-1)
+        });
+
+        return Ok("Logged out");
+    }
+    
+    [Authorize]
+    [HttpGet("profile")]
+    public IActionResult Profile()
+    {
+        // var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var username = User.FindFirst("username")?.Value;
+        return Ok(new { username });
+    }
+
 }
