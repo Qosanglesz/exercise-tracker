@@ -9,7 +9,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b066039d-fb22-43e9-83f0-cfaca44f4be3" name="Changes" comment="" />
+    <list default="true" id="b066039d-fb22-43e9-83f0-cfaca44f4be3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Features/Users/Controllers/UserController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Features/Users/DTOs/CreateUserDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Features/Users/Models/User.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Features/Users/Services/IUserService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Features/Users/Services/UserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ExerciseTrackerAPI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExerciseTrackerAPI/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DatabaseProvider/AppDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseProvider/AppDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExerciseTrackerAPI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ExerciseTrackerAPI.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Features/ExerciseTasks/Models/ExerciseTask.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Features/ExerciseTasks/Models/ExerciseTask.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mappers/MappingProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mappers/MappingProfile.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,23 +49,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.ExerciseTrackerAPI: IIS Express.executor": "Run",
-    ".NET Launch Settings Profile.ExerciseTrackerAPI: http.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.ExerciseTrackerAPI: IIS Express.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.ExerciseTrackerAPI: http.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.ExerciseTrackerAPI: http">
     <configuration name="ExerciseTrackerAPI: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/ExerciseTrackerAPI.csproj" />
@@ -113,6 +124,7 @@
       <workItem from="1749105494050" duration="2445000" />
       <workItem from="1749107991014" duration="616000" />
       <workItem from="1749108639102" duration="17411000" />
+      <workItem from="1749358513441" duration="2847000" />
     </task>
     <servers />
   </component>

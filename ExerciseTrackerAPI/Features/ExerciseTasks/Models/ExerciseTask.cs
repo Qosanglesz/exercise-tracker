@@ -1,3 +1,5 @@
+using ExerciseTrackerAPI.Features.Users.Models;
+
 namespace ExerciseTrackerAPI.Features.ExerciseTasks.Models;
 
 using System.ComponentModel.DataAnnotations;
@@ -15,4 +17,8 @@ public class ExerciseTask
     public int NumberOfSet {get; set;}
     public double Weight { get; set; }
     public DateTime Created { get; set; } = DateTime.UtcNow;
+    
+    [Required]
+    public Guid UserId { get; set; }
+    public User User { get; set; } = null!;
 }
